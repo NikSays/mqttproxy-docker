@@ -4,5 +4,7 @@ services:
     build: "."
     ports:
       - "22:22"
+    environment:
+      INTERVAL: 30
     volumes:
       - "./keys/:/opt/keys/"
