@@ -13,7 +13,7 @@ Use docker-compose to set:
 
 ### Prebuilt image
 
-Prebuilt image available at [niksaysit/mqttproxy](https://hub.docker.com/repository/docker/niksaysit/mqttproxy)
+Prebuilt image available at [niksaysit/mqttproxy](https://hub.docker.com/r/niksaysit/mqttproxy)
 
 docker-compose.yml to use with prebuilt image
 ```
