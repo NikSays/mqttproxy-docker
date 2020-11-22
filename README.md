@@ -10,3 +10,6 @@ Use docker-compose to set:
 * Maximum failed attempts
 * Interval to search for failed attempts (fail2ban syntax)
 * Ban time (fail2ban syntax) 
+
+
+Prebuilt image available at [niksaysit/mqttproxy](https://hub.docker.com/repository/docker/niksaysit/mqttproxy)
