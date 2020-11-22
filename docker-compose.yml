@@ -6,8 +6,9 @@ services:
       - "22:22"
     environment:
       INTERVAL: 30
-#      BAN_ATTEMPTS: 1
-#      BAN_TIME: 1m
+      BAN_ATTEMPTS: 5
+      BAN_TIME: 12h
+      BAN_FIND_INTERVAL: 10m
     cap_add:
       - NET_ADMIN
     volumes:

@@ -9,4 +9,5 @@ fi
 /usr/bin/fail2ban-server
 /usr/bin/fail2ban-client set sshd bantime ${BAN_TIME-12h}
 /usr/bin/fail2ban-client set sshd maxretry ${BAN_ATTEMPTS-5} 
+/usr/bin/fail2ban-client set sshd findtime ${BAN_FIND_INTERVAL-10m} 
 python3 -u /opt/otp.py
