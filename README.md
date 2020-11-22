@@ -3,4 +3,5 @@
 A container with SSH allowed to one user, without shell access
 
 Password is changed every 30 seconds 
-//TODO: generate a random string except otp
+
+Use docker-compose to set SSH port and password change interval
