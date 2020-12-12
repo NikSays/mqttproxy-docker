@@ -4,7 +4,7 @@ services:
     build: "."
     image: mqttproxy
     ports:
-      - "22:22"
+      - "2022:22"
     environment:
       INTERVAL: 30
       BAN_ATTEMPTS: 5

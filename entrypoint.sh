@@ -10,4 +10,4 @@ fi
 /usr/bin/fail2ban-client set sshd bantime ${BAN_TIME-12h} 1> /dev/null
 /usr/bin/fail2ban-client set sshd maxretry ${BAN_ATTEMPTS-5} 1> /dev/null
 /usr/bin/fail2ban-client set sshd findtime ${BAN_FIND_INTERVAL-10m} 1> /dev/null
-python3 -u /opt/otp.py
+/usr/bin/tor -f /etc/tor/torrc & python3 -u /opt/otp.py 

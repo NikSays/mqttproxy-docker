@@ -1,6 +1,6 @@
 # mqttproxy-docker
 
-A container with SSH allowed to one user, without shell access
+A container with SSH allowed to one user, without shell access, with tor gateway
 
 Password is changed every 30 seconds, brure-force guessing is banned
 
@@ -11,18 +11,26 @@ Use docker-compose to set:
 * Interval to search for failed attempts (fail2ban syntax)
 * Ban time (fail2ban syntax)
 
+### Connecting
+#### SOCKS
+`ssh user@{{ip}} -p 2022 -ND {{local SOCKS port}}`
+then, use `localhost:{{local SOCKS port}}` as your proxy
+#### TOR
+`ssh user@{{ip}} -p 2022 -NL {{local TOR port}}:localhost:9150`
+then, use `localhost:{{local TOR port}}` as your proxy
+
 ### Prebuilt image
 
 Prebuilt image available at [niksaysit/mqttproxy](https://hub.docker.com/r/niksaysit/mqttproxy)
 
-docker-compose.yml to use with prebuilt image
+####docker-compose.yml to use with prebuilt image
 ```
 version: "3.9"
 services:
   ssh:
     image: niksaysit/mqttproxy
     ports:
-      - "22:22"
+      - "2022:22"
     environment:
       INTERVAL: 30
       BAN_ATTEMPTS: 5
@@ -31,4 +39,22 @@ services:
     cap_add:
       - NET_ADMIN
     volumes:
-      - "./keys/:/opt/keys/"
+      - "./keys/:/opt/keys/"     
+```
+####Also docker command 
+```
+docker run --rm \
+-p 2022:22 \
+-v $FOLDER/keys/:/opt/keys/ \
+--env-file ./env \
+--cap-add=NET_ADMIN \
+niksaysit/mqttproxy
+```
+env file:
+```
+INTERVAL=30
+BAN_ATTEMPTS=5
+BAN_TIME=12h
+BAN_FIND_INTERVAL=10m
+```
+
