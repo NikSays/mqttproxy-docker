@@ -13,8 +13,8 @@ Use docker-compose to set:
 
 ### Connecting
 #### SOCKS
-`ssh user@{{ip}} -p 2022 -ND {{local SOCKS port}}`
-then, use `localhost:{{local SOCKS port}}` as your proxy
+`ssh user@{{ip}} -p 2022 -ND {{local SOCKS port}} -L 853:localhost:853`
+then, use `localhost:{{local SOCKS port}}` as your proxy, and localhost as your dns
 #### TOR
 `ssh user@{{ip}} -p 2022 -NL {{local TOR port}}:localhost:9150`
 then, use `localhost:{{local TOR port}}` as your proxy
@@ -40,12 +40,16 @@ services:
       - NET_ADMIN
     volumes:
       - "./keys/:/opt/keys/"     
+      - "./ag/work/:/opt/adguardhome/work/"
+      - "./ag/conf/:/opt/adguardhome/conf/"
 ```
 ####Also docker command 
 ```
 docker run --rm \
 -p 2022:22 \
 -v $FOLDER/keys/:/opt/keys/ \
+-v $FOLDER/ag/work/:/opt/adguardhome/work/ \
+-v $FOLDER/ag/conf/:/opt/adguardhome/conf/ \
 --env-file ./env \
 --cap-add=NET_ADMIN \
 niksaysit/mqttproxy
@@ -57,4 +61,3 @@ BAN_ATTEMPTS=5
 BAN_TIME=12h
 BAN_FIND_INTERVAL=10m
 ```
-

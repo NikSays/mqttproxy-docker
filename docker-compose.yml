@@ -14,4 +14,5 @@ services:
       - NET_ADMIN
     volumes:
       - "./keys/:/opt/keys/"
-
+      - "./ag/work/:/opt/adguardhome/work/"
+      - "./ag/conf/:/opt/adguardhome/conf/"

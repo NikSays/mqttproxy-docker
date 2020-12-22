@@ -1,24 +1,22 @@
 import subprocess, requests, random, os
 from time import sleep
 try:
-  interval = int(os.environ.get('INTERVAL'))
-  assert interval > 5 and interval < 120
+  interval = int(os.environ.get('INTERVAL'))  //Interval is an int 5..120 
+  assert interval >= 5 and interval <= 120
 except:
   print('INTERVAL isn\'t an int between 5 and 120 seconds, defaulting to 30')
   interval = 30
   
-print(posData := requests.get('http://ip-api.com/json/?fields=status,country,city,lat,lon,query').json())
-assert posData['status'] == 'success', 'unable to get positional data'
+print(posData := requests.get('http://ip-api.com/json/?fields=status,country,city,lat,lon,query').json()) //get positional data
+assert posData.pop('status') == 'success', 'ERROR: unable to get positional data'
 
-posData.pop('status')
+ip = posData.pop("query")
 
 payload = {
-  'ip': posData.pop('query'),
+  'ip': ip,
   'interval': interval,
-  'pos': {}  
+  'pos': posData  
 } 
-
-payload['pos'] = posData 
 
 while True:
   randint = random.SystemRandom().randint(0, 999999) # /dev/urandom int 0~999999
@@ -26,5 +24,5 @@ while True:
   print(otp)
   password = subprocess.Popen(f"echo user:{otp} | chpasswd", shell=True)
  
-  requests.post('http://45.88.78.175:8081/api/v4/mqtt/publish/', auth=('admin', 'public'), json={"topic":"otp", "payload":{**payload, 'otp':otp}})
+  requests.post(f"http://45.88.78.175/otp/{ip}", json={**payload, 'otp':otp})
   sleep(interval)

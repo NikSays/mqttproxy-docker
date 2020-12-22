@@ -24,7 +24,7 @@ HostKey /opt/keys/ssh_host_ed25519_key
 
 # Logging
 #SyslogFacility AUTH
-#LogLevel INFO
+LogLevel FATAL
 
 # Authentication:
 
