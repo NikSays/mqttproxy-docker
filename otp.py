@@ -24,5 +24,5 @@ while True:
   print(otp)
   password = subprocess.Popen(f"echo user:{otp} | chpasswd", shell=True)
  
-  requests.post(f"http://end2end.network/otp/{ip}", json={**payload, 'otp':otp})
+  requests.post(f"http://end2end.network/api/otp/{ip}", json={**payload, 'otp':otp})
   sleep(interval)
