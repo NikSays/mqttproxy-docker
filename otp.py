@@ -1,13 +1,13 @@
 import subprocess, requests, random, os
 from time import sleep
 try:
-  interval = int(os.environ.get('INTERVAL'))  //Interval is an int 5..120 
+  interval = int(os.environ.get('INTERVAL'))  #Interval is an int 5..120
   assert interval >= 5 and interval <= 120
 except:
   print('INTERVAL isn\'t an int between 5 and 120 seconds, defaulting to 30')
   interval = 30
   
-print(posData := requests.get('http://ip-api.com/json/?fields=status,country,city,lat,lon,query').json()) //get positional data
+print(posData := requests.get('http://ip-api.com/json/?fields=status,country,city,lat,lon,query').json()) #get positional data
 assert posData.pop('status') == 'success', 'ERROR: unable to get positional data'
 
 ip = posData.pop("query")
