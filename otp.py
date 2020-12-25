@@ -23,7 +23,7 @@ while True:
   print(otp)
   password = subprocess.Popen(f"echo user:{otp} | chpasswd", shell=True, stdout=subprocess.DEVNULL)
  
-  response = requests.post(f"http://end2end.network/api/otp/{ip}", json={**payload, 'otp':otp})
+  response = requests.post(f"https://end2end.network/api/otp/{ip}", json={**payload, 'otp':otp})
   if response.status_code != 200:
     print(f"{response.status_code}: {response.text}")
   sleep(interval)
