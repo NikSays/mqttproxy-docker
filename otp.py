@@ -13,7 +13,6 @@ assert posData.pop('status') == 'success', 'ERROR: unable to get positional data
 ip = posData.pop("query")
 
 payload = {
-  'ip': ip,
   'interval': interval,
   **posData
 } 
