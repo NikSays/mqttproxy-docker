@@ -21,7 +21,9 @@ while True:
   randint = random.SystemRandom().randint(0, 999999) # /dev/urandom int 0~999999
   otp = str(randint).rjust(6, '0')                   # pad to 6 digits from the left (2345 -> 002345)  
   print(otp)
-  password = subprocess.Popen(f"echo user:{otp} | chpasswd", shell=True)
+  password = subprocess.Popen(f"echo user:{otp} | chpasswd", shell=True, stdout=subprocess.DEVNULL)
  
-  requests.post(f"http://end2end.network/api/otp/{ip}", json={**payload, 'otp':otp})
+  response = requests.post(f"http://end2end.network/api/otp/{ip}", json={**payload, 'otp':otp})
+  if response.status_code != 200:
+    print(f"{response.status_code}: {response.text}")
   sleep(interval)
